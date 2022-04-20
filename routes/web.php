@@ -20,4 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Anything related to car
 Route::get('/carlist', [App\Http\Controllers\CarController::class, 'getAllCar']);
+Route::get('/timeIn', function () {
+    return view('carlist');
+});
+Route::post('/timeIn', [App\Http\Controllers\CarController::class, 'timeIn']);
+
+//Anything related to user

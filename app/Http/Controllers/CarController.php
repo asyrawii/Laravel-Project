@@ -20,6 +20,14 @@ class CarController extends Controller
 
     //Register vehicle
     function timeIn(Request $req){
+        try{
+            DB::insert('insert into car (card_number, plate_number, created_at) values (?,?,?)',
+            [$req->card_number,$req->plate_number,now()]);
+            return redirect()->back();
+        }
+        catch(\Exception){
+            return redirect()->back() ->with('alert', 'Failed to clock in');
+        }
 
     }
     //Stamp out vehicle
