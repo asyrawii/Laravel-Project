@@ -32,14 +32,23 @@ class CarController extends Controller
     }
     //Stamp out vehicle
     function timeOut(Request $req){
+        try{
+            DB::table('car')->where('card_number', $req->card_number)
+            ->orwhere('plate_number', $req->plate_number)
+            ->update(array(
+            'updated_at' => DB::raw('now()')));
+        }
+        catch(\Exception){
+            return redirect()->back() ->with('alert', 'Failed to clock out');
+        }
+
 
     }
     //Search car based on plate number or card number
     function search(Request $req){
-        return view('viewcar',['users'=>DB::table('car')
-        ->select(DB::raw('id, name, email, password, created_at'))
+        return view('carlist',['car'=>DB::table('car')
+        ->select(DB::raw('id, plate_number, card_number, created_at, updated_at'))
         ->where('plate_number','like','%'.$req->search.'%')
-        ->orwhere('card_number','like','%'.$req->search.'%')->paginate(5)]
-        );
+        ->orwhere('card_number','like','%'.$req->search.'%')->paginate(5)]);
     }
 }

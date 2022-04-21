@@ -19,8 +19,8 @@
               <td>{{ $cars->id}}</td>
               <td>{{ $cars->plate_number}}</td>
               <td>{{ $cars->card_number}}</td>
-              <td>{{ date('d-M-Y',strtotime($cars->created_at))}}</td>
-              <td>{{ date('d-M-Y',strtotime($cars->updated_at))}}</td>
+              <td>{{ date('d-M-Y H:m:s',strtotime($cars->created_at))}}</td>
+              <td>{{ date('d-M-Y H:m:s',strtotime($cars->updated_at))}}</td>
               <td>
                     <a href="/home"><img src="/bootstrap/images/edit.svg" class="bi me-2" width="32" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></img></a>
                     <a href="/home"><img src="/bootstrap/images/delete.svg" class="bi me-2" width="32" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></img></a>
@@ -52,4 +52,11 @@
     <!-- <a href="{{ URL::previous() }}" class="btn btn-warning"> <i class="fas fa-arrow-left"></i> Go Back</a> -->
   </form>
 </main>
+</div>
+<div>
+  <form action="carlist" method="post" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+  @csrf
+    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" value="{{request()->input('search')}}" name="search">
+    <button type="submit" class="btn btn-outline-light me-2">Search</button>
+  </form>
 </div>

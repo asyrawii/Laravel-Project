@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\HTTP\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Anything related to car
-Route::get('/carlist', [App\Http\Controllers\CarController::class, 'getAllCar']);
+Route::get('/carlist', [CarController::class, 'getAllCar']);
+Route::post('/carlist', [CarController::class, 'search']);
 Route::get('/timeIn', function () {
     return view('carlist');
 });
-Route::post('/timeIn', [App\Http\Controllers\CarController::class, 'timeIn']);
+Route::post('/timeIn', [CarController::class, 'timeIn']);
 
 //Anything related to user
